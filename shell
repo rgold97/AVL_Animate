@@ -1,0 +1,182 @@
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
+public class Neew extends JPanel
+{
+    private GraphicPanel graphics = new GraphicPanel();
+    
+    private JTextField console = new JTextField(5);
+    
+    private JButton jbtSearch = new JButton("Search");
+
+    private JButton jbtInsert = new JButton("Insert");
+
+    private JButton jbtDelete = new JButton("Delete");
+    
+    int width;
+    int height;
+
+//    ArrayList<Node> nodes;
+
+
+    public Neew() {
+        add(graphics);
+        add(console);
+        add(jbtInsert);
+        add(jbtSearch);
+        add(jbtDelete);
+        
+//        nodes = new ArrayList<Node>();
+    	width = 30;
+    	height = 30;
+
+     
+     
+
+                // **** ACTIONS ****
+                // insert actions
+            	jbtInsert.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	String InsertValue = console.getText();
+                    	try{	
+                    	int InsertVal = Integer.parseInt(InsertValue);
+                    		System.out.println("1");
+                  	  		}  
+                  	  	catch(NumberFormatException nfe){   
+                  	  		System.out.println("-1");
+                  	  	}   
+                    }
+                });
+             // Delete actions
+            	jbtDelete.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	String DeleteValue = console.getText();
+                    	System.out.println(DeleteValue);
+                    	try{	
+                        	int DeleteVal = Integer.parseInt(DeleteValue);
+                        	System.out.println("1");
+                      	  }  
+                      	  catch(NumberFormatException nfe){   
+                      	    System.out.println("-1");
+                      	  } 
+                    }
+                });
+             // search actions
+            	jbtSearch.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                    	String SearchValue = console.getText();
+                    	try{	
+                        	int SearchVal = Integer.parseInt(SearchValue);
+                        		System.out.println("1");
+                      	  		}  
+                      	  	catch(NumberFormatException nfe){   
+                      	  		System.out.println("-1");
+                      	  	}   
+                    	
+                    }
+                });
+               
+                console.setText("");
+                graphics.repaint();
+            }
+    
+    public static void main(String[] args) {
+        Neew mainPanel = new Neew();
+
+        JFrame frame = new JFrame("Simple Testing Frame");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add(mainPanel);
+        frame.pack();
+        
+        frame.setVisible(true);
+    }
+    
+//    class Node {
+//    	Node edge;
+//    	String name;
+//    	int level;
+//    	
+//    	public Node(String myName) {
+//    	    name = myName;
+//    	}
+//    	public addedge(String myName) {
+//    	    name = myName;
+//    	}
+//    	
+//        }
+//        
+//        
+//        public void addNode(String name) { 
+//    	//add a node at pixel (x,y)
+//    	nodes.add(new Node(name));
+//    	this.repaint();
+//        }
+        
+        
+}
+
+
+
+class GraphicPanel extends JPanel 
+{
+    private BufferedImage image;
+    private static Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
+
+
+
+    
+
+    GraphicPanel() {
+        setPreferredSize(new Dimension(800, 600));
+        image = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
+        setMaximumSize(new Dimension(image.getWidth(), image.getHeight()));
+        clear();
+        
+    }
+
+
+    // Clears the image contents.
+    public void clear() {
+
+        Graphics g = image.getGraphics();
+
+        g.setColor(BACKGROUND_COLOR);
+        g.fillRect(0, 0, image.getWidth(), image.getHeight());
+    }
+
+//    public void paint(Graphics g) { // draw the nodes and edges
+//    	FontMetrics f = g.getFontMetrics();
+//    	int nodeHeight = Math.max(height, f.getHeight());
+//
+//    	g.setColor(Color.black);
+//    	for (edge e : edges) {
+//    	    g.drawLine(nodes.get(e.i).x, nodes.get(e.i).y,
+//    		     nodes.get(e.j).x, nodes.get(e.j).y);
+//    	}
+//
+//    	for (Node n : nodes) {
+//    	    int nodeWidth = Math.max(width, f.stringWidth(n.name)+width/2);
+//    	    g.setColor(Color.white);
+//    	    g.fillOval(n.x-nodeWidth/2, n.y-nodeHeight/2, 
+//    		       nodeWidth, nodeHeight);
+//    	    g.setColor(Color.black);
+//    	    g.drawOval(n.x-nodeWidth/2, n.y-nodeHeight/2, 
+//    		       nodeWidth, nodeHeight);
+//    	    
+//    	    g.drawString(n.name, n.x-f.stringWidth(n.name)/2,
+//    			 n.y+f.getHeight()/2);
+//    	}
+//     }
+    @Override
+    public void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+
+        // render the image on the panel.
+        g.drawImage(image, 0, 0, null);
+    }
+}
